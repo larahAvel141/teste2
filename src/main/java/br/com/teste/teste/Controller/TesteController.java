@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +24,11 @@ public class TesteController {
         return livros;
     }
 
+    @GetMapping(value = "/{nome}")
+    public String requisicao(@PathVariable String nome){
+        return String.format("Olá %s, tudo bem? ;) !!",nome);
+    }
+
     @PostMapping
     public Livros cadastrarLivros(@RequestBody Livros livro){
         livros.add(livro);
@@ -30,7 +36,8 @@ public class TesteController {
     }
 
     @PutMapping
-    public String alterarLivros(@RequestBody String livro){
+    public Livros alterarLivros(@RequestBody Livros livro){
+        livro.setTitulo(livro.getTitulo()+"modificado com sucesso");
         return livro;
     }
     
